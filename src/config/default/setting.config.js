@@ -22,7 +22,7 @@ const setting = {
   //标题是否反转 如果为false:"page - title"，如果为ture:"title - page"
   titleReverse: false,
   //简写
-  abbreviation: 'vab-pro',
+  abbreviation: 'Liu_blog',
   //开发环境端口号
   devPort: '9999',
   //版本号

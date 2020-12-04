@@ -1,6 +1,7 @@
 <template>
   <div class="editor">
     <div id="vditor" name="description" />
+    <a-button @click="save"></a-button>
   </div>
 </template>
 <script>
@@ -21,7 +22,7 @@
         mode: 'sv',
         lang: this.lang,
         cache: {
-          enable: false,
+          enable: true,
         },
         placeholder: this.welcome,
         minHeight: 600,
@@ -114,6 +115,11 @@
       })
     },
     methods: {
+      save() {
+        console.log(this.contentEditor.getValue())
+        console.log('---------------------------------')
+        console.log(this.contentEditor.getHTML())
+      },
       async open_md() {
         console.log('open_md')
         // const file_path  = await dialog.open({
