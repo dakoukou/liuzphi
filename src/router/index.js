@@ -53,8 +53,8 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'home',
-        name: 'Home',
+        path: 'index',
+        name: 'index',
         component: () => import('@/views/admin/article/ArticleIndex'),
         meta: {
           title: '文章面板',
@@ -65,7 +65,7 @@ export const asyncRoutes = [
         path: 'edit',
         name: 'Edit',
         hidden: true,
-        component: () => import('@/views/admin/article/EditArticle'),
+        component: () => import('@/views/admin/article/writeArticle/EditArticle'),
         meta: {
           title: '文章编辑',
           icon: 'table-2',
@@ -73,6 +73,36 @@ export const asyncRoutes = [
       },
     ],
   },
+  // {
+  //   path: '/daily',
+  //   component: Layout,
+  //   redirect: '/daily/index',
+  //   meta: {
+  //     title: '日志',
+  //     icon: 'apps-line',
+  //   },
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'index',
+  //       component: () => import('@/views/admin/daily/DailyIndex'),
+  //       meta: {
+  //         title: '日志面板',
+  //         icon: 'table-2',
+  //       },
+  //     },
+  //     {
+  //       path: 'edit',
+  //       name: 'Edit',
+  //       hidden: true,
+  //       component: () => import('@/views/admin/daily/writeDaily/EditDaily'),
+  //       meta: {
+  //         title: '日志编辑',
+  //         icon: 'table-2',
+  //       },
+  //     },
+  //   ],
+  // },
   {
     path: '/vab',
     component: Layout,
