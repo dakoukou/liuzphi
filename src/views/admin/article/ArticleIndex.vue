@@ -1,54 +1,77 @@
 <template>
   <div>
-
     <a-button @click="goToEditArticle" type="link">写一篇文章</a-button>
-     <a-table :columns="columns" :data-source="data">
-       <template #name="{ text }">
-         <a>{{ text }}</a>
-       </template>
-       <template #customTitle>
-         <span><smile-outlined /> 标题</span>
-       </template>
-       <template #publishState="{ text, record }">
-         <a-switch checked-children="取消发布" un-checked-children=发布 v-model:checked="record.publishState" />
-       </template>
-       <template #encryptionState="{ text, record }">
-         <span v-if="record.encryptionState ===0"><smile-outlined /> 未加密</span>
-         <a-input-password v-else v-model:value="record.encryption" placeholder="input password" />
-       </template>
-       <template #tags="{ text: tags }">
-      <span>
-        <a-tag
+    <a-table :columns="columns" :data-source="data">
+      <template #name="{ text }">
+        <a>{{ text }}</a>
+      </template>
+      <template #customTitle>
+        <span>
+          <smile-outlined />
+          标题
+        </span>
+      </template>
+      <template #publishState="{ record }">
+        <a-switch
+          checked-children="取消发布"
+          un-checked-children="发布"
+          v-model:checked="record.publishState"
+        />
+      </template>
+      <template #encryptionState="{ record }">
+        <span v-if="record.encryptionState === 0">
+          <smile-outlined />
+          未加密
+        </span>
+        <a-input-password
+          v-else
+          v-model:value="record.encryption"
+          placeholder="input password"
+        />
+      </template>
+      <template #tags="{ text: tags }">
+        <span>
+          <a-tag
             v-for="tag in tags"
             :key="tag"
-            :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-        >
-          {{ tag.toUpperCase() }}
-        </a-tag>
-      </span>
-       </template>
-       <template #action="{ text, record }">
-          <a-button type="primary" shape="circle">
-    <template #icon><EditOutlined /> </template
-          ></a-button>
+            :color="
+              tag === 'loser'
+                ? 'volcano'
+                : tag.length > 5
+                ? 'geekblue'
+                : 'green'
+            "
+          >
+            {{ tag.toUpperCase() }}
+          </a-tag>
+        </span>
+      </template>
+      <template #action="{}">
+        <a-button type="primary" shape="circle">
+          <template #icon><EditOutlined /></template>
+        </a-button>
         <a-divider type="vertical" />
-            <a-button type="danger">
-    <template #icon><DeleteOutlined /> </template
-            ></a-button>
-       </template>
-     </a-table>
+        <a-button type="danger">
+          <template #icon><DeleteOutlined /></template>
+        </a-button>
+      </template>
+    </a-table>
   </div>
 </template>
 <script>
   import { useRouter } from 'vue-router'
-  import {ref} from 'vue'
-  import { SmileOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons-vue';
+  import { ref } from 'vue'
+  import {
+    SmileOutlined,
+    DeleteOutlined,
+    EditOutlined,
+  } from '@ant-design/icons-vue'
   export default {
     name: 'ArticleIndex',
     props: {
       msg: String,
     },
-    components:{DeleteOutlined, EditOutlined, SmileOutlined},
+    components: { DeleteOutlined, EditOutlined, SmileOutlined },
     setup() {
       const { push } = useRouter()
       const columns = [
@@ -87,7 +110,10 @@
           width: 150,
           dataIndex: 'encryptionState',
           key: 'encryptionState',
-          slots: { title: 'customEncryptionState', customRender: 'encryptionState' },
+          slots: {
+            title: 'customEncryptionState',
+            customRender: 'encryptionState',
+          },
         },
         {
           title: '分类',
@@ -106,8 +132,8 @@
           key: 'action',
           slots: { customRender: 'action' },
         },
-      ];
-      const publishStateValidaFlag= ref(false);
+      ]
+      const publishStateValidaFlag = ref(false)
       const data = ref([
         {
           key: '1',
@@ -115,10 +141,10 @@
           readNums: 32,
           likeNums: 31,
           commentNums: 33,
-          publishState:true,
-          category:1,
-          encryptionState:1,
-          encryption:'111111',
+          publishState: true,
+          category: 1,
+          encryptionState: 1,
+          encryption: '111111',
           tags: ['nice', 'developer'],
         },
         {
@@ -127,10 +153,10 @@
           readNums: 32,
           likeNums: 31,
           commentNums: 33,
-          publishState:false,
-          category:2,
-          encryptionState:0,
-          encryption:'',
+          publishState: false,
+          category: 2,
+          encryptionState: 0,
+          encryption: '',
           tags: ['loser'],
         },
         {
@@ -139,16 +165,16 @@
           readNums: 32,
           likeNums: 31,
           commentNums: 33,
-          publishState:true,
-          category:3,
-          encryptionState:1,
-          encryption:'111111',
+          publishState: true,
+          category: 3,
+          encryptionState: 1,
+          encryption: '111111',
           tags: ['cool', 'teacher'],
         },
-      ]);
+      ])
 
       function goToEditArticle() {
-        push({name:'Edit'})
+        push({ name: 'Edit' })
       }
       return {
         goToEditArticle,
